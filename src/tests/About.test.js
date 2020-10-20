@@ -16,4 +16,11 @@ describe('tests About component', () => {
     const heading = getByText(/About Pokédex/i);
     expect(heading).toBeInTheDocument();
   });
+
+  it('page has 2 paragraph about pokédex', () => {
+    const { container } = render(<About />);
+    const paragraphs = container.querySelectorAll('p');
+    const two = 2;
+    expect(paragraphs.length).toBe(two);
+  });
 });
