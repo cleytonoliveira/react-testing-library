@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllByText, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import About from '../components/About';
 
 describe('tests About component', () => {
