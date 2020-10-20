@@ -1,7 +1,7 @@
-import { getByText } from '@testing-library/react';
 import React from 'react';
-import App from '../App';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
+import App from '../App';
 
 describe('Tests for App component', () => {
   it('renders the home page with the path `/`', () => {
@@ -20,5 +20,12 @@ describe('Tests for App component', () => {
     expect(about).toBeInTheDocument();
     const favorites = getByText(/Favorite Pokémons/i);
     expect(favorites).toBeInTheDocument();
+  });
+
+  it('redirect to home page when click in link Home', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/Home/i));
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
   });
 });
