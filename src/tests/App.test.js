@@ -28,4 +28,18 @@ describe('Tests for App component', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/');
   });
+
+  it('redirect to about page when click in link About', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/About/i));
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
+  });
+
+  it('redirect to favorites pokémons when click in link Favorite Pokémons', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    fireEvent.click(getByText(/Favorite Pokémons/i));
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
+  });
 });
