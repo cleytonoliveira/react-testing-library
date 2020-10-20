@@ -42,4 +42,11 @@ describe('Tests for App component', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/favorites');
   });
+
+  it('redirect to Not Found page when use a unknown URL', () => {
+    const { getByText, history } = renderWithRouter(<App />);
+    history.push('/another-page/');
+    const noMatch = getByText(/Page requested not found/i);
+    expect(noMatch).toBeInTheDocument();
+  });
 });
