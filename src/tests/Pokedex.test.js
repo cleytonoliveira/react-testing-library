@@ -6,9 +6,6 @@ import App from '../App';
 const pokemonList = [
   'Cartepie', 'Ekans', 'Alakazam', 'Mew', 'Rapidash', 'Snorlax', 'Dragonair'];
 
-const pokemonTypes = [
-  'Eletric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
-
 describe('test Pokedex component', () => {
   it('render a next pokemon when click in `Próximo pokémon`', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
