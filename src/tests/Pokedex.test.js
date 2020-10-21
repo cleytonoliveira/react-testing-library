@@ -6,6 +6,9 @@ import App from '../App';
 const pokemonList = [
   'Cartepie', 'Ekans', 'Alakazam', 'Mew', 'Rapidash', 'Snorlax', 'Dragonair'];
 
+const pokemonTypes = [
+  'Eletric', 'Fire', 'Bug', 'Poison', 'Psychic', 'Normal', 'Dragon'];
+
 describe('test Pokedex component', () => {
   it('render a next pokemon when click in `Próximo pokémon`', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
@@ -21,5 +24,12 @@ describe('test Pokedex component', () => {
     expect(dragonair).toBeInTheDocument();
     fireEvent.click(button);
     expect(pikachu).toBeInTheDocument();
+  });
+
+  it('option to filter by type', () => {
+    const { getByRole } = renderWithRouter(<App />);
+    const eletric = getByRole('button', { name: 'Electric' });
+    fireEvent.click(eletric);
+    expect(eletric).toBeEnabled();
   });
 });
