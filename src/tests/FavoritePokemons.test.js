@@ -26,4 +26,15 @@ describe('tests for Favorite Pokemons component', () => {
     const charmander = getByText(/Charmander/i);
     expect(charmander).toBeInTheDocument();
   });
+
+  it('not render pokemon not be a favorite', () => {
+    const { getByRole, queryByText, history } = renderWithRouter(<App />);
+    history.push('/pokemons/151');
+    const checkbox = getByRole('checkbox');
+    fireEvent.click(checkbox);
+    expect(checkbox.checked).toBeTruthy();
+    history.push('/favorites');
+    const dragonair = queryByText(/Dragonair/i);
+    expect(dragonair).not.toBeInTheDocument();
+  });
 });
