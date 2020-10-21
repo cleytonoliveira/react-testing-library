@@ -10,4 +10,11 @@ describe('tests of NotFound component', () => {
     const text = getByText(/Page requested not found/i);
     expect(text).toBeInTheDocument();
   });
+
+  it('render a image `https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif`', () => {
+    const { getByAltText } = render(<NotFound />);
+    const image = getByAltText(/Pikachu/i);
+    expect(image).toBeInTheDocument();
+    expect(image).toHaveAttribute('src', 'https://media.giphy.com/media/kNSeTs31XBZ3G/giphy.gif');
+  });
 });
