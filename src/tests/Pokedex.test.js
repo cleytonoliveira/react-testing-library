@@ -10,6 +10,8 @@ describe('test Pokedex component', () => {
   it('render a next pokemon when click in `Próximo pokémon`', () => {
     const { getByText, getByRole } = renderWithRouter(<App />);
     const button = getByRole('button', { name: 'Próximo pokémon' });
+    const title = getByText(/Encountered pokémons/i);
+    expect(title).toBeInTheDocument();
     expect(button).toBeInTheDocument();
     const pikachu = getByText(/Pikachu/i);
     expect(pikachu).toBeInTheDocument();
@@ -25,9 +27,9 @@ describe('test Pokedex component', () => {
 
   it('option to filter by type', () => {
     const { getByRole } = renderWithRouter(<App />);
-    const eletric = getByRole('button', { name: 'Electric' });
-    fireEvent.click(eletric);
-    expect(eletric).toBeEnabled();
+    const psychic = getByRole('button', { name: 'Psychic' });
+    fireEvent.click(psychic);
+    expect(psychic).toBeEnabled();
   });
 
   it('button to reset the filter', () => {
@@ -43,5 +45,12 @@ describe('test Pokedex component', () => {
     expect(pikachu).toBeInTheDocument();
     fireEvent.click(btnNext);
     expect(charmander).toBeInTheDocument();
+  });
+
+  it('filter button for type of Pokémon', () => {
+    const { getAllByTestId } = renderWithRouter(<App />);
+    const allTypes = getAllByTestId('pokemon-type-button');
+    const seven = 7;
+    expect(allTypes.length).toBe(seven);
   });
 });
