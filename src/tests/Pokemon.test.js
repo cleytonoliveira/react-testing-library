@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, getByRole } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import { Pokemon } from '../components';
 import pokemons from '../data';
 import renderWithRouter from '../renderWithRouter';
@@ -23,7 +23,7 @@ describe('test Pokemon Component', () => {
 
   it('test link navigation to render details about pokémon', () => {
     const { getByRole } = renderWithRouter(<Pokemon
-      pokemon={ pokemons[0] }    
+      pokemon={ pokemons[0] }
     />);
     const linkDetails = getByRole('link', { name: /More details/i });
     expect(linkDetails).toBeInTheDocument();
@@ -33,11 +33,20 @@ describe('test Pokemon Component', () => {
   it('redirect to details page', () => {
     const { getByRole, history } = renderWithRouter(<Pokemon
       pokemon={ pokemons[0] }
-      />);
+    />);
     const linkDetails = getByRole('link', { name: /More details/i });
     expect(linkDetails).toBeInTheDocument();
     fireEvent.click(linkDetails);
     const { pathname } = history.location;
     expect(pathname).toBe('/pokemons/25');
+  });
+
+  it('icon stars in favorite pokémons', () => {
+    const { getByAltText } = renderWithRouter(<Pokemon
+      pokemon={ pokemons[0] }
+      isFavorite
+    />);
+    const starImage = getByAltText(/Pikachu is marked as favorite/i);
+    expect(starImage).toHaveAttribute('src', '/star-icon.svg');
   });
 });
