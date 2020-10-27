@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, fireEvent, getByText } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
-import { Pokedex } from '../components';
 
 const pokemonList = [
   'Cartepie', 'Ekans', 'Alakazam', 'Mew', 'Rapidash', 'Snorlax', 'Dragonair'];
