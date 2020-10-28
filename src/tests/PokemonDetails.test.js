@@ -12,6 +12,8 @@ describe('test Pokemon Details component', () => {
     expect(nameDetails).toBeInTheDocument();
     const paragraph = getByText(/electricity to make them/i);
     expect(paragraph).toBeInTheDocument();
+    const summary = getByText(/Summary/i);
+    expect(summary).toBeInTheDocument();
   });
 
   it('render pokemon locations', () => {
@@ -27,5 +29,13 @@ describe('test Pokemon Details component', () => {
     const images = getAllByAltText(/Pikachu location/i);
     expect(images[0]).toHaveAttribute('src', 'https://cdn.bulbagarden.net/upload/0/08/Kanto_Route_2_Map.png');
     expect(images[1]).toHaveAttribute('src', 'https://cdn.bulbagarden.net/upload/b/bd/Kanto_Celadon_City_Map.png');
+  });
+
+  it('possible to favorite the pokemon in details', () => {
+    const { getByText } = renderWithRouter(<App />);
+    const detailsBtn = getByText(/More details/i);
+    fireEvent.click(detailsBtn);
+    const favoriteLabel = getByText(/Pokémon favoritado?/i);
+    expect(favoriteLabel).toBeInTheDocument();
   });
 });
