@@ -32,10 +32,13 @@ describe('test Pokemon Details component', () => {
   });
 
   it('possible to favorite the pokemon in details', () => {
-    const { getByText } = renderWithRouter(<App />);
+    const { getByText, getByRole } = renderWithRouter(<App />);
     const detailsBtn = getByText(/More details/i);
     fireEvent.click(detailsBtn);
     const favoriteLabel = getByText(/Pokémon favoritado?/i);
     expect(favoriteLabel).toBeInTheDocument();
+    const checkbox = getByRole('checkbox');
+    fireEvent.click(checkbox);
+    expect(checkbox.checked).toBeTruthy();
   });
 });
